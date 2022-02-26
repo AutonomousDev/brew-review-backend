@@ -1,0 +1,16 @@
+{
+  "name": "brew-review-backend",
+  "version": "1.0.0",
+  "description": "Backend for brew review.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.3",
+    "forever": "^4.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cameron Bowers, Richard Silva",
+  "license": "ISC"
+}
