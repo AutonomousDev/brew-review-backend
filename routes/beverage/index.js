@@ -51,7 +51,7 @@ router.get('/brewery/:id', (req, res) => {
 
     // Define our queries
     // ? towards the end is replaced with brewery_id
-    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', Category.name AS 'Category' "
+    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', Category.name AS 'Category', Brewery.name AS 'Brewery' "
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
