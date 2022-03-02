@@ -4,7 +4,7 @@ const db = require('../../database/db-connector')
 router.get('/', (req, res) => {
     /** Select categories for the homepage */
     // Define our queries
-    let query1 = "SELECT Parent_Category.name AS 'Type', Category.name AS 'Name' " 
+    let query1 = "SELECT Parent_Category.name AS 'Type', Category.name AS 'Name', Category.categoryID AS 'categoryID', Category.parentCategoryID AS parentCategoryID" 
     query1 += "FROM Category "
     query1 += "INNER JOIN Parent_Category "
     query1 += "ON Category.parentCategoryID = Parent_Category.parentCategoryID;"
