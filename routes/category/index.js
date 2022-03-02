@@ -24,7 +24,7 @@ router.get('/category/:id', (req, res) => {
     query1 += "FROM Category "
     query1 += "INNER JOIN Parent_Category "
     query1 += "ON Category.parentCategoryID = Parent_Category.parentCategoryID "
-    query1 += "WHERE Category.categoryID = ? ";
+    query1 += "WHERE Category.categoryID = ? ;"
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     db.pool.query(query1, (err, rows, fields) => {
