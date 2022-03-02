@@ -1,7 +1,7 @@
 let router = require('express').Router();
 const db = require('../../database/db-connector')
 
-router.get('/tag-list', (req, res) => {
+router.get('/', (req, res) => {
     /** Select tags for the tag page */
     // Define our queries
     let query1 = "SELECT Tag.name AS 'Name' " 
