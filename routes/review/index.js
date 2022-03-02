@@ -8,7 +8,7 @@ router.get('/review/:id', (req, res) => {
     const review_id = req.params.id   
 
     // Define our queries
-    let query1 = "SELECT Review.rating AS 'Rating', Review.textReview AS 'Review Text' " 
+    let query1 = "SELECT Review.rating AS 'Rating', Review.textReview AS 'Review_Text' " 
     query1 += "FROM Review "
     query1 += "WHERE Review.reviewID = ?;"
 
@@ -22,12 +22,12 @@ router.get('/review/:id', (req, res) => {
     // This is where review_id is inserted into the query at ?
     db.pool.query(query1, [review_id], (err, rows, fields) => {
         // Send the results to the browser
-        res.json({rows});
+        res.json(rows);
     });
 
     db.pool.query(query2, [review_id], (err, rows, fields) => {
         // Send the results to the browser
-        res.json({rows});
+        res.json(rows);
     });
 });
 

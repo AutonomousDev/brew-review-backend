@@ -27,7 +27,7 @@ router.get('/category/:id', (req, res) => {
 
     // Define our queries
     // ? towards the end is replaced with category_id
-    let query1 = "SELECT Beverage.name AS 'Beverage Name', Beverage.abv AS 'ABV', Brewery.name AS 'Brewery', Category.name AS 'Category' "
+    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', Brewery.name AS 'Brewery', Category.name AS 'Category' "
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
@@ -38,7 +38,7 @@ router.get('/category/:id', (req, res) => {
     // This is where category_id is inserted into the query at ?
     db.pool.query(query1, [category_id], (err, rows, fields) => {
         // Send the results to the browser
-        res.json({rows});
+        res.json(rows);
     });
 });
 
@@ -51,7 +51,7 @@ router.get('/brewery/:id', (req, res) => {
 
     // Define our queries
     // ? towards the end is replaced with brewery_id
-    let query1 = "SELECT Beverage.name AS 'Beverage Name', Beverage.abv AS 'ABV', Category.name AS 'Category' "
+    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', Category.name AS 'Category' "
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
@@ -62,7 +62,7 @@ router.get('/brewery/:id', (req, res) => {
     // This is where brewery_id is inserted into the query at ?
     db.pool.query(query1, [brewery_id], (err, rows, fields) => {
         // Send the results to the browser
-        res.json({rows});
+        res.json(rows);
     });
 });
 

@@ -11,7 +11,7 @@ router.get('/parent-category', (req, res) => {
     db.pool.query(query1, (err, rows, fields) => {
         // Send the results to the browser
         res.setHeader('Content-Type', 'application/json');
-        res.json({rows});
+        res.json(rows);
     });
 });
 
