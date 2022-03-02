@@ -4,7 +4,7 @@ const db = require('../../database/db-connector')
 router.get('/', (req, res) => {
     /** Select breweries for the homepage */
     // Define our queries
-    let query1 = "SELECT Brewery.name AS 'Brewery', Brewery.streetNumber AS 'Street Number', " 
+    let query1 = "SELECT Brewery.name AS 'Brewery', Brewery.streetNumber AS 'Street_Number', " 
     query1 += "Brewery.streetName AS 'Street_Name', Brewery.city AS 'City', "
     query1 += "Brewery.zipCode AS 'Zip_Code', Brewery.state AS 'State', "
     query1 += "Brewery.website AS 'Website' "
