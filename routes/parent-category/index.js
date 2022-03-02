@@ -1,7 +1,7 @@
 let router = require('express').Router();
 const db = require('../../database/db-connector')
 
-router.get('/parent-category', (req, res) => {
+router.get('/', (req, res) => {
     /** Select parent_categories for the homepage */
     // Define our queries
     let query1 = "SELECT Parent_Category.name AS 'Type' " 

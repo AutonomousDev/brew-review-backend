@@ -1,7 +1,7 @@
 let router = require('express').Router();
 const db = require('../../database/db-connector')
 
-router.get('/review/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     /** Select reviews for a certain beverage */
     console.log("Fetching reviews: " + req.params.id)
     //Stores the input id from the request to a variable

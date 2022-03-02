@@ -1,7 +1,7 @@
 let router = require('express').Router();
 const db = require('../../database/db-connector')
 
-router.get('/brewery', (req, res) => {
+router.get('/', (req, res) => {
     /** Select breweries for the homepage */
     // Define our queries
     let query1 = "SELECT Brewery.name AS 'Brewery', Brewery.streetNumber AS 'Street Number', " 
