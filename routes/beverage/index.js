@@ -4,7 +4,7 @@ const db = require('../../database/db-connector')
 router.get('/', (req, res) => {
     /** Select beverages for the homepage */
     // Define our queries
-    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', Brewery.name AS 'Brewery', Category.name AS 'Category, Category.id AS 'Category_id' " 
+    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', Brewery.name AS 'Brewery', Category.name AS 'Category', Category.id AS 'Category_id' " 
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
