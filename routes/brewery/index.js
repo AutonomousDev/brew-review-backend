@@ -31,8 +31,9 @@ router.get('/:id', (req, res) => {
     query1 += "Brewery.zipCode AS 'Zip_Code', Brewery.state AS 'State', "
     query1 += "Brewery.website AS 'Website', Brewery.breweryID AS 'breweryID' "
     query1 += "FROM Brewery "
-    query1 += "LIMIT 6 "
-    query1 += "WHERE Brewery.breweryID = ? ;"
+    query1 += "WHERE Brewery.breweryID = ?"
+    query1 += "LIMIT 6;"
+
     
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     db.pool.query(query1, [breweryIDNumber], (err, rows, fields) => {
