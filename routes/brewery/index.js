@@ -20,10 +20,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    /** Select category by id */
+    /** Select brewery by id */
 
     //Stores the input id from the request to a variable
-    const breweryID = req.params.id  
+    const breweryIDNumber = req.params.id  
 
     // Define our queries
     let query1 = "SELECT Brewery.name AS 'Brewery', Brewery.streetNumber AS 'Street_Number', " 
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
     query1 += "WHERE Brewery.breweryID = ? ;"
     
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
-    db.pool.query(query1, [breweryID], (err, rows, fields) => {
+    db.pool.query(query1, [breweryIDNumber], (err, rows, fields) => {
         // Send the results to the browser
         res.setHeader('Content-Type', 'application/json');
         res.json(rows);
