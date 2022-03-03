@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
     const review_id = req.params.id
 
     // Define our queries
-    let query1 = "SELECT Review.rating AS 'Rating', Review.textReview AS 'Review_Text' "
+    let query1 = "SELECT Review.rating AS 'Rating', Review.textReview AS 'Review_Text', Review.reviewID as 'reviewID' "
     query1 += "FROM Review "
     query1 += "WHERE Review.reviewID = ?;"
 
