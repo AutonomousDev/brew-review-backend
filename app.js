@@ -1,6 +1,8 @@
 let express = require('express');   // We are using the express library for the web server
 let app = express();            // We need to instantiate an express object to interact with the server in our code
 PORT = process.env.PORT || 3000;;                 // Set a port number at the top so it's easy to change in the future
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // Cors should allow access from extrernal addresses.
 var cors = require('cors')

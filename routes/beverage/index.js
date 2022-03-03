@@ -73,11 +73,12 @@ router.post('/', (req, res) => {
 
     console.log("Inserting information into the beverage table: ");
     let data = req.body;
-    console.log(req);
+    console.log(data);
 
     // Defining our queries
-    let query1 = "INSERT INTO Beverage (name, abv, breweryID, categoryID) "
-    query1 += "VALUES ('${data.nameInput}', '${data.abvInput}', '${data.breweryID_FK}', '${data.categoryID_FK}';";
+    let query1 = `INSERT INTO Beverage (name, abv, breweryID, categoryID) `
+    query1 += `VALUES ('${data.nameInput}', ${data.abvInput}, ${data.breweryID_FK}, ${data.categoryID_FK});`
+    console.log(query1);
 
     db.pool.query(query1, (err, rows, fields) => {
         res.redirect('/');
