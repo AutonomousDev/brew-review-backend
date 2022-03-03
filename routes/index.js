@@ -9,6 +9,6 @@ router.use('/brewery', require('./brewery'));
 router.use('/category', require('./category'));
 router.use('/parent-category', require('./parent-category'));
 router.use('/review', require('./review'));
-router.use('/tag-list', require('./tag-list'));
+router.use('/tag', require('./tag'));
 
 module.exports = router;
