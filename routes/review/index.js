@@ -12,7 +12,7 @@ router.get('/:id', (req, res) => {
     query1 += "FROM Review "
     query1 += "WHERE Review.reviewID = ?;"
 
-    let query2 = "SELECT Tag.name AS 'Tags' "
+    let query2 = "SELECT Tag.name AS 'Tags', Tag.tagID AS 'tagID' "
     query2 += "FROM Tag "
     query2 += "INNER JOIN Review_Tag ON Tag.tagID = Review_Tag.tagID "
     query2 += "INNER JOIN Review ON Review_Tag.reviewID = Review.reviewID "
@@ -31,4 +31,22 @@ router.get('/:id', (req, res) => {
     });
 });
 
-module.exports = router;  
+router.get('beverage/:id', (req, res) => {
+    /** Select reviews for beverage */
+    console.log("Fetching beverage reviews: " + req.params.id)
+    const beverage_id = req.params.id;
+
+    // Define our queries
+    let query1 = "SELECT Review.reviewID as 'reviewID' "
+    query1 += "FROM review "
+    query1 += "WHERE Review.beverageID = ?;"
+    db.pool.query(query1, [beverageID], (err, rows, fields) => {
+        // Send the results to the browser
+        res.setHeader('Content-Type', 'application/json');
+        res.json(rows);
+    });
+});
+    
+
+
+module.exports = router;
