@@ -74,8 +74,6 @@ router.post('/', (req, res) => {
     db.pool.query(query1, (err, rows1, fields) => {
         
         let review_id = rows1.insertId;
-        console.log(review_id);
-        console.log(rows1);
         let tags = data.tags;
         if (isNaN(tags)){
             res.redirect('/');
@@ -90,13 +88,13 @@ router.post('/', (req, res) => {
             db.pool.query(query2, (err, rows2, fields) => {
 
                 console.log(rows2);
-                console.log(rows2[0].tagID);
                 let tagID;
 
-                if (Object.keys(rows2) === 0){
+                if (rows2.length === 0){
                     let query4 = `INSERT INTO Tag (name) `
                     query4 += `VALUES ('${tag}');`
                     db.pool.query(query4, (err, rows4, fields) => {
+                        console.log(rows4);
                         tagID = rows4.insertId;
                     })
                 } else {
