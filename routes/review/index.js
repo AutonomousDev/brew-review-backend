@@ -60,4 +60,62 @@ router.get('/beverage/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+
+    console.log("Inserting information into the review table: ");
+    let data = req.body;
+
+    // Defining our queries
+    let query1 = `INSERT INTO Review (textReview, rating, beverageID) `
+    query1 += `VALUES ('${data.textReviewInput}', ${data.ratingInput}, ${data.beverageID_FK});`
+    console.log(query1);
+    console.log(data);
+
+    db.pool.query(query1, (err, rows1, fields) => {
+        
+        let review_id = rows1.insertId;
+        console.log(review_id);
+        console.log(rows1);
+        let tags = data.tags;
+        if (isNaN(tags)){
+            res.redirect('/');
+        }
+        
+        for (const tag of tags){
+            let query2 = `SELECT Tag.tagID `
+            query2 += `FROM Tag `
+            query2 += `WHERE Tag.name = '${tag}'`;
+            console.log(query2);
+
+            db.pool.query(query2, (err, rows2, fields) => {
+
+                console.log(rows2);
+                console.log(rows2[0].tagID);
+                let tagID;
+
+                if (Object.keys(rows2) === 0){
+                    let query4 = `INSERT INTO Tag (name) `
+                    query4 += `VALUES ('${tag}');`
+                    db.pool.query(query4, (err, rows4, fields) => {
+                        tagID = rows4.insertId;
+                    })
+                } else {
+                    tagID = rows2[0].tagID;
+                    console.log(tagID);
+                }
+                let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
+                query3 += `VALUES (${review_id}, ${tagID});`
+                console.log(query3);
+                console.log(tagID);
+
+                db.pool.query(query3, (err, rows3, fields) => {
+
+                });
+            });
+        }
+    });
+
+});
+
+
 module.exports = router;
