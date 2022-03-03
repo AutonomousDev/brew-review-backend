@@ -20,6 +20,30 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+    /** Select beverages for the homepage */
+
+    //Stores the input id from the request to a variable
+    const beverage_ID = req.params.id   
+
+    // Define our queries
+    let query1 = "SELECT Beverage.name AS 'Beverage_Name', Beverage.abv AS 'ABV', "
+    query1 += "Brewery.name AS 'Brewery', Category.name AS 'Category', Category.categoryID AS 'categoryID', "
+    query1 += "Brewery.breweryID AS 'breweryID', Beverage.beverageID AS 'beverageID' " 
+    query1 += "FROM Beverage "
+    query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
+    query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
+    query1 += "WHERE Beverage.beverageID = ? "
+    query1 += "LIMIT 6;";
+
+    // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
+    db.pool.query(query1, [beverage_ID], (err, rows, fields) => {
+        // Send the results to the browser
+        res.setHeader('Content-Type', 'application/json');
+        res.json(rows);
+    });
+});
+
 router.get('/category/:id', (req, res) => {
     console.log("Fetching beverages with category: " + req.params.id)
     /** Select beverages by category name */
