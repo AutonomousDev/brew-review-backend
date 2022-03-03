@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
         db.pool.query(query2, [review_id], (err, rows2, fields) => {
             // Send the results to the browser
             rows2 = Object.assign(rows2, rows1);
-            res.json({rows2});
+            res.json(rows2);
         });
     });
 });
