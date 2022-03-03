@@ -1,4 +1,5 @@
 let router = require('express').Router();
+const { NULL } = require('mysql/lib/protocol/constants/types');
 const db = require('../../database/db-connector')
 
 router.get('/:id', (req, res) => {
@@ -75,42 +76,45 @@ router.post('/', (req, res) => {
         
         let review_id = rows1.insertId;
         let tags = data.tags;
-        if (isNaN(tags)){
+        console.log(tags);
+        if (tags === undefined){
             res.redirect('/');
         }
-        
-        for (const tag of tags){
-            let query2 = `SELECT Tag.tagID `
-            query2 += `FROM Tag `
-            query2 += `WHERE Tag.name = '${tag}'`;
-            console.log(query2);
-
-            db.pool.query(query2, (err, rows2, fields) => {
-
-                console.log(rows2);
-                let tagID;
-
-                if (rows2.length === 0){
-                    let query4 = `INSERT INTO Tag (name) `
-                    query4 += `VALUES ('${tag}');`
-                    db.pool.query(query4, (err, rows4, fields) => {
-                        console.log(rows4);
-                        tagID = rows4.insertId;
-                    })
-                } else {
-                    tagID = rows2[0].tagID;
+        else {
+            for (const tag of tags){
+                let query2 = `SELECT Tag.tagID `
+                query2 += `FROM Tag `
+                query2 += `WHERE Tag.name = '${tag}'`;
+                console.log(query2);
+    
+                db.pool.query(query2, (err, rows2, fields) => {
+    
+                    console.log(rows2);
+                    let tagID;
+    
+                    if (rows2.length === 0){
+                        let query4 = `INSERT INTO Tag (name) `
+                        query4 += `VALUES ('${tag}');`
+                        db.pool.query(query4, (err, rows4, fields) => {
+                            console.log(rows4);
+                            tagID = rows4.insertId;
+                        })
+                    } else {
+                        tagID = rows2[0].tagID;
+                        console.log(tagID);
+                    }
+                    let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
+                    query3 += `VALUES (${review_id}, ${tagID});`
+                    console.log(query3);
                     console.log(tagID);
-                }
-                let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
-                query3 += `VALUES (${review_id}, ${tagID});`
-                console.log(query3);
-                console.log(tagID);
-
-                db.pool.query(query3, (err, rows3, fields) => {
-
+    
+                    db.pool.query(query3, (err, rows3, fields) => {
+    
+                    });
                 });
-            });
+            }
         }
+        
     });
 
 });
