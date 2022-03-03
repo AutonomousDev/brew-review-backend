@@ -38,10 +38,8 @@ router.get('/category/:id', (req, res) => {
     // This is where category_id is inserted into the query at ?
     db.pool.query(query1, [category_id], (err, rows, fields) => {
         // Send the results to the browser
-
         res.setHeader('Content-Type', 'application/json');
         res.json(rows);
-
     });
 });
 
