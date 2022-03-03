@@ -15,4 +15,21 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+
+    console.log("Inserting information into the tag table: ");
+    let data = req.body;
+
+    // Defining our queries
+    let query1 = `INSERT INTO Tag (name) `
+    query1 += `VALUES ('${data.nameInput}');`
+    console.log(query1);
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
+
+
+});
+
 module.exports = router;  

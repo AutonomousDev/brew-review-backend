@@ -38,4 +38,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+
+    console.log("Inserting information into the category table: ");
+    let data = req.body;
+
+    // Defining our queries
+    let query1 = `INSERT INTO Category (name, parentCategoryID) `
+    query1 += `VALUES ('${data.nameInput}', ${data.parentCategoryID_FK});`
+    console.log(query1);
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
+
+
+});
+
 module.exports = router;  
