@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
     query1 += "Brewery.breweryID AS 'breweryID', Beverage.beverageID AS 'beverageID' " 
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
-    query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
-    query1 += "LIMIT 6;";
+    query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID; ";
+    //query1 += "LIMIT 6;";
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     db.pool.query(query1, (err, rows, fields) => {
