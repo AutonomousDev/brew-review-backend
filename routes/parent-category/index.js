@@ -4,7 +4,7 @@ const db = require('../../database/db-connector')
 router.get('/', (req, res) => {
     /** Select parent_categories for the homepage */
     // Define our queries
-    let query1 = "SELECT Parent_Category.name AS 'Type' " 
+    let query1 = "SELECT Parent_Category.name AS 'Type', Parent_Category.parentCategoryID as 'parentCategoryID' " 
     query1 += "FROM Parent_Category;"
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
