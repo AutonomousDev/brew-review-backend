@@ -92,7 +92,7 @@ router.post('/', (req, res) => {
                     console.log("Attempt at mapping tags to existing tag id returns:")
                     console.log(rows2);
                     const tagID = { 
-                        id: undefined,
+                        id: 0,
                         setID: function(newID) {
                           this.id=newID
                         }
@@ -106,6 +106,7 @@ router.post('/', (req, res) => {
                             console.log(rows4);
                             console.log(rows4.insertId);
                             tagID.setID(rows4.insertId);
+                            console.log("Tag id should change: ",tagID.id);
                         })
                     } else {
                         tagID.setID(rows2[0].tagID);
