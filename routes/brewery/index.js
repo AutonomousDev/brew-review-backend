@@ -8,8 +8,8 @@ router.get('/', (req, res) => {
     query1 += "Brewery.streetName AS 'Street_Name', Brewery.city AS 'City', "
     query1 += "Brewery.zipCode AS 'Zip_Code', Brewery.state AS 'State', "
     query1 += "Brewery.website AS 'Website', Brewery.breweryID AS 'breweryID' "
-    query1 += "FROM Brewery "
-    query1 += "LIMIT 6;"
+    query1 += "FROM Brewery;";
+
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     db.pool.query(query1, (err, rows, fields) => {
@@ -31,8 +31,8 @@ router.get('/:id', (req, res) => {
     query1 += "Brewery.zipCode AS 'Zip_Code', Brewery.state AS 'State', "
     query1 += "Brewery.website AS 'Website', Brewery.breweryID AS 'breweryID' "
     query1 += "FROM Brewery "
-    query1 += "WHERE Brewery.breweryID = ?"
-    query1 += "LIMIT 6;"
+    query1 += "WHERE Brewery.breweryID = ?;";
+
 
     
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
