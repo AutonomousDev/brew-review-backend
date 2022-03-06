@@ -99,6 +99,7 @@ router.post('/', (req, res) => {
                         db.pool.query(query4, (err, rows4, fields) => {
                             console.log("Adding tag returns: ")
                             console.log(rows4);
+                            console.log(rows4.insertId);
                             tagID = rows4.insertId;
                         })
                     } else {
@@ -106,10 +107,11 @@ router.post('/', (req, res) => {
                         
                         console.log("Existing tag id is: ", tagID);
                     }
+                    console.log("tagID is still: ", tagID)
                     let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
                     query3 += `VALUES (${review_id}, ${tagID});`
                     console.log(query3);
-                    console.log(tagID);
+                    console.log("TagID is: ",tagID);
     
                     db.pool.query(query3, (err, rows3, fields) => {
     
