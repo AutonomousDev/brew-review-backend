@@ -62,7 +62,7 @@ router.get('/beverage/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
+    // Expects textReviewInput, ratingInput, beverageID_FK, tags
     console.log("Inserting information into the review table: ");
     let data = req.body;
 
