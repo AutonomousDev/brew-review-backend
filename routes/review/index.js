@@ -91,7 +91,12 @@ router.post('/', (req, res) => {
                 db.pool.query(query2, (err, rows2, fields) => {
                     console.log("Attempt at mapping tags to existing tag id returns:")
                     console.log(rows2);
-                    let tagID;
+                    const tagID = { 
+                        id: undefined,
+                        setID: function(newID) {
+                          this.id=newID
+                        }
+                      };
     
                     if (rows2.length === 0){
                         let query4 = `INSERT INTO Tag (name) `
@@ -100,18 +105,18 @@ router.post('/', (req, res) => {
                             console.log("Adding tag returns: ")
                             console.log(rows4);
                             console.log(rows4.insertId);
-                            tagID = rows4.insertId;
+                            tagID.setID(rows4.insertId);
                         })
                     } else {
-                        tagID = rows2[0].tagID;
+                        tagID.setID(rows2[0].tagID);
                         
-                        console.log("Existing tag id is: ", tagID);
+                        console.log("Existing tag id is: ", tagID.id);
                     }
-                    console.log("tagID is still: ", tagID)
+                    console.log("tagID is still: ", tagID.id)
                     let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
-                    query3 += `VALUES (${review_id}, ${tagID});`
+                    query3 += `VALUES (${review_id}, ${tagID.id});`
                     console.log(query3);
-                    console.log("TagID is: ",tagID);
+                    console.log("TagID is: ",tagID.id);
     
                     db.pool.query(query3, (err, rows3, fields) => {
     
