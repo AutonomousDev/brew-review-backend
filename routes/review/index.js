@@ -81,6 +81,7 @@ router.post('/', (req, res) => {
             res.redirect('/');
         }
         else {
+            // If there is tags in the request.
             for (const tag of tags){
                 let query2 = `SELECT Tag.tagID `
                 query2 += `FROM Tag `
@@ -88,7 +89,7 @@ router.post('/', (req, res) => {
                 console.log(query2);
     
                 db.pool.query(query2, (err, rows2, fields) => {
-    
+                    console.log("Attempt at mapping tags to existing tag id returns:")
                     console.log(rows2);
                     let tagID;
     
@@ -96,12 +97,14 @@ router.post('/', (req, res) => {
                         let query4 = `INSERT INTO Tag (name) `
                         query4 += `VALUES ('${tag}');`
                         db.pool.query(query4, (err, rows4, fields) => {
+                            console.log("Adding tag returns: ")
                             console.log(rows4);
                             tagID = rows4.insertId;
                         })
                     } else {
                         tagID = rows2[0].tagID;
-                        console.log(tagID);
+                        
+                        console.log("Existing tag id is: ", tagID);
                     }
                     let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
                     query3 += `VALUES (${review_id}, ${tagID});`
@@ -114,6 +117,7 @@ router.post('/', (req, res) => {
                 });
             }
         }
+        res.redirect('/');
         
     });
 
