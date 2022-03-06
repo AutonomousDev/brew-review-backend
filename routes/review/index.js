@@ -97,23 +97,36 @@ router.post('/', (req, res) => {
                         let query4 = `INSERT INTO Tag (name) `
                         query4 += `VALUES ('${tag}');`
                         db.pool.query(query4, (err, rows4, fields) => {
-                            console.log("Adding tag returns: ")
+                            console.log("Adding tag returns: ");
                             console.log(rows4);
                             tagID = rows4.insertId;
+                            console.log("tagID is: ")
+                            console.log(tagID);
+
+                            let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
+                            query3 += `VALUES (${review_id}, ${tagID});`
+                            console.log(query3);
+                            console.log(tagID);
+                                        
+                            db.pool.query(query3, (err, rows3, fields) => {
+            
+                            });
                         })
                     } else {
                         tagID = rows2[0].tagID;
                         
                         console.log("Existing tag id is: ", tagID);
+
+                        let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
+                        query3 += `VALUES (${review_id}, ${tagID});`
+                        console.log(query3);
+                        console.log(tagID);
+        
+                        db.pool.query(query3, (err, rows3, fields) => {
+        
+                        });
                     }
-                    let query3 = `INSERT INTO Review_Tag (reviewID, tagID) `
-                    query3 += `VALUES (${review_id}, ${tagID});`
-                    console.log(query3);
-                    console.log(tagID);
-    
-                    db.pool.query(query3, (err, rows3, fields) => {
-    
-                    });
+
                 });
             }
             res.redirect('/');
