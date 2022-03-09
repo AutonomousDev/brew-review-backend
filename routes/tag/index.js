@@ -32,4 +32,16 @@ router.post('/', (req, res) => {
 
 });
 
+
+router.put('/', (req, res) => {
+    console.log("Updating tag table: at");
+    // Defining our queries
+    let query1 = `UPDATE 'Tag' SET 'Name'=? WHERE tagID=? `    
+    console.log(query1);
+    db.pool.query(query1, [req.body.Name, req.body.tagID ], (err, rows, fields) => {
+        if (err) throw err;
+        res.end(JSON.stringify(results));
+    });
+});
+
 module.exports = router;  
