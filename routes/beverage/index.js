@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     query1 += "Brewery.breweryID AS 'breweryID', Beverage.beverageID AS 'beverageID' " 
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
-    query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID; ";
+    query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
     //query1 += "LIMIT 6;";
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
@@ -33,8 +33,8 @@ router.get('/:id', (req, res) => {
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
-    query1 += "WHERE Beverage.beverageID = ?;";
-
+    query1 += "WHERE Beverage.beverageID = ? "
+    //query1 += "LIMIT 6;";
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     db.pool.query(query1, [beverage_ID], (err, rows, fields) => {
@@ -57,8 +57,8 @@ router.get('/category/:id', (req, res) => {
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
-    query1 += "WHERE Category.categoryID = ?;";
-
+    query1 += "WHERE Category.categoryID = ? "
+    //query1 += "LIMIT 6;";
     
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     // This is where category_id is inserted into the query at ?
@@ -82,7 +82,8 @@ router.get('/brewery/:id', (req, res) => {
     query1 += "FROM Beverage "
     query1 += "INNER JOIN Brewery ON Beverage.breweryID = Brewery.breweryID "
     query1 += "INNER JOIN Category ON Beverage.categoryID = Category.categoryID "
-    query1 += "WHERE Brewery.breweryID = ?;";
+    query1 += "WHERE Brewery.breweryID = ? "
+    //query1 += "LIMIT 6;";
 
     // Execute every query in an asynchronous manner, we want each query to finish before the next one starts
     // This is where brewery_id is inserted into the query at ?
@@ -108,6 +109,20 @@ router.post('/', (req, res) => {
     });
 
 
+});
+
+router.put('/edit-beverage/:id', (req, res) => {
+
+    let data = req.body;
+    console.log(req.params);
+    console.log(`Updating beverage on id ${req.params.id}:`);
+    query1 = `UPDATE Beverage `
+    query1 += `SET name = '${data.nameInput}', abv = ${data.abvInput}, breweryID = ${data.breweryID_FK}, categoryID = ${data.categoryID_FK} `
+    query1 += `WHERE beverageID = ${req.params.id};`
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
 });
 
 
