@@ -40,7 +40,7 @@ router.put('/', (req, res) => {
     console.log(query1);
     db.pool.query(query1, [req.body.Name, req.body.tagID ], (err, rows, fields) => {
         if (err) throw err;
-        res.end(JSON.stringify(results));
+        res.end(JSON.stringify(rows));
     });
 });
 
