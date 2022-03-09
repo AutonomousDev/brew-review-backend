@@ -125,5 +125,17 @@ router.put('/edit-beverage/:id', (req, res) => {
     });
 });
 
+router.delete('/delete-beverage/:id', (req, res) => {
+
+    let data = req.body;
+    console.log(`Deleting beverage at ${req.params.id}`);
+    query1 = `DELETE FROM Beverage `
+    query1 += `WHERE beverageID = ${req.params.id};`
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
+});
+
 
 module.exports = router;  
