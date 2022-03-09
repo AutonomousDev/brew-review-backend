@@ -134,5 +134,17 @@ router.post('/', (req, res) => {
     });
 });
 
+router.put('/edit-review/:id', (req, res) => {
+
+    let data = req.body;
+    console.log(`Updating review on ${req.params.id}:`);
+    query1 = `UPDATE Review `
+    query1 += `SET textReview = '${data.textReviewInput}', rating = ${data.ratingInput} `
+    query1 += `WHERE reviewID = ${req.params.id};`;
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    })
+});
 
 module.exports = router;
