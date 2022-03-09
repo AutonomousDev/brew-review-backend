@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 });
 
 
-router.put('/', (req, res) => {
+router.put('/update-tag', (req, res) => {
     console.log("Updating tag table: at");
     // Defining our queries
     let query1 = `UPDATE 'Tag' SET 'Name'=? WHERE tagID=? `    
