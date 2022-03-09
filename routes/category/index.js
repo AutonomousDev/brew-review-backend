@@ -70,4 +70,16 @@ router.put('/edit-category/:id', (req, res) => {
     
 });
 
+router.delete('/delete-category/:id', (req, res) => {
+
+    console.log(`Deleting category at id: ${req.params.id}`);
+
+    let query1 = `DELETE FROM Category `
+    query1 += `WHERE categoryID = ${req.params.id};`
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
+});
+
 module.exports = router;  

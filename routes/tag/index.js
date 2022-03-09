@@ -38,7 +38,7 @@ router.put('/update-tag/:id', (req, res) => {
     let data = req.body;
     console.log(`Updating tag with tag id: ${req.params.id}`)
     // Defining our queries
-    let query1 = `UPDATE Tag SET name = '${data.nameInput}' WHERE tagID = ${req.params.id};`    
+    let query1 = `UPDATE Tag SET name = '${data.nameInput}' WHERE tagID = ${req.params.id};`;    
     console.log(query1);
     db.pool.query(query1, (err, rows, fields) => {
         if (err){
@@ -46,6 +46,18 @@ router.put('/update-tag/:id', (req, res) => {
         } else {
             res.end(JSON.stringify(rows));
         }
+    });
+});
+
+router.delete('/delete-tag/:id', (req, res) => {
+
+    console.log(`Deleting tag with tag id: ${req.params.id}`);
+
+    let query1 = `DELETE FROM Tag `
+    query1 += `WHERE tagID = ${req.params.id}`;
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
     });
 });
 
