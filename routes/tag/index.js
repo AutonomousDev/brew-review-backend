@@ -33,14 +33,19 @@ router.post('/', (req, res) => {
 });
 
 
-router.put('/update-tag', (req, res) => {
-    console.log("Updating tag table: at");
+router.put('/update-tag/:id', (req, res) => {
+
+    let data = req.body;
+    console.log(`Updating tag with tag id: ${req.params.id}`)
     // Defining our queries
-    let query1 = `UPDATE 'Tag' SET 'Name'=? WHERE tagID=? `    
+    let query1 = `UPDATE Tag SET name = '${data.nameInput}' WHERE tagID = ${req.params.id};`    
     console.log(query1);
-    db.pool.query(query1, [req.body.Name, req.body.tagID ], (err, rows, fields) => {
-        if (err) throw err;
-        res.end(JSON.stringify(rows));
+    db.pool.query(query1, (err, rows, fields) => {
+        if (err){
+            throw err;
+        } else {
+            res.end(JSON.stringify(rows));
+        }
     });
 });
 
