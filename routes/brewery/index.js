@@ -62,4 +62,22 @@ router.post('/', (req, res) => {
 
 });
 
+router.put('/edit-brewery/:id', (req, res) => {
+
+    let data = req.body;
+    console.log(`Editing brewery on ${req.params.id}`);
+
+    query1 = `UPDATE Brewery `
+    query1 += `SET name = '${data.nameInput}', streetNumber = ${data.streetNumberInput}, streetName = '${data.streetNameInput}', `
+    query1 += `city = '${data.cityInput}', zipCode = ${data.zipCodeInput}, state = '${data.stateInput}', website = '${data.websiteInput}' `
+    query1 += `WHERE breweryID = ${req.params.id};`
+
+    console.log(query1);
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    })
+
+});
+
 module.exports = router;

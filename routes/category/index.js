@@ -55,4 +55,19 @@ router.post('/', (req, res) => {
 
 });
 
+router.put('/edit-category/:id', (req, res) => {
+
+    console.log(`Updating category at id: ${req.params.id}`);
+    let data = req.body;
+
+    let query1 = `UPDATE Category `
+    query1 += `SET name = '${data.nameInput}', parentCategoryID = ${data.parentCategoryID_FK} `
+    query1 += `WHERE categoryID = ${req.params.id};`
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
+    
+});
+
 module.exports = router;  
