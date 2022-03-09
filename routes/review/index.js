@@ -150,17 +150,6 @@ router.put('/edit-review/:id', (req, res) => {
 router.delete('/delete-review/:id', (req, res) => {
 
     console.log(`Deleting review on id: ${req.params.id}`);
-    /*let tags = req.body.tags;
-    console.log(tags);
-    for (const tag of tags) {
-        let query1 = `DELETE FROM Review_Tag `
-        query1 += `WHERE reviewID = ${req.params.id} AND tagID = ${tag};`;
-        db.pool.query(query1, (err, rows, fields) => {
-            console.log(`Deleting M:M row where the review id is ${req.params.id} 
-            and the tag id is ${tag}`);
-        });
-        console.log(query1);
-    }*/
     
     let query2 = `DELETE FROM Review `
     query2 += `WHERE reviewID = ${req.params.id};`;

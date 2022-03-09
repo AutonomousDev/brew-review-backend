@@ -67,7 +67,7 @@ router.put('/edit-brewery/:id', (req, res) => {
     let data = req.body;
     console.log(`Editing brewery on ${req.params.id}`);
 
-    query1 = `UPDATE Brewery `
+    let query1 = `UPDATE Brewery `
     query1 += `SET name = '${data.nameInput}', streetNumber = ${data.streetNumberInput}, streetName = '${data.streetNameInput}', `
     query1 += `city = '${data.cityInput}', zipCode = ${data.zipCodeInput}, state = '${data.stateInput}', website = '${data.websiteInput}' `
     query1 += `WHERE breweryID = ${req.params.id};`
@@ -76,8 +76,21 @@ router.put('/edit-brewery/:id', (req, res) => {
 
     db.pool.query(query1, (err, rows, fields) => {
         res.redirect('/');
-    })
+    });
 
+});
+
+router.delete('/delete-brewery/:id', (req, res) => {
+
+    console.log(`Deleting brewery at id: ${req.params.id}`);
+
+    let query1 = `DELETE FROM Brewery `
+    query1 += `WHERE breweryID = ${req.params.id};`;
+    console.log(query1);
+
+    db.pool.query(query1, (err, rows, fields) => {
+        res.redirect('/');
+    });
 });
 
 module.exports = router;
