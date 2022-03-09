@@ -4,6 +4,7 @@ PORT = process.env.PORT || 3000;;                 // Set a port number at the to
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
 // Cors should allow access from extrernal addresses.
 var cors = require('cors')
 app.use(cors())
