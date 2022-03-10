@@ -52,9 +52,8 @@ router.put('/update-tag/:id', (req, res) => {
 router.delete('/delete-tag/:id', (req, res) => {
 
     console.log(`Deleting tag with tag id: ${req.params.id}`);
-
     let query1 = `DELETE FROM Tag `
-    query1 += `WHERE tagID = ${req.params.id}`;
+    query1 += `WHERE tagID = ${req.params.id};`;
 
     db.pool.query(query1, (err, rows, fields) => {
         res.redirect('/');
